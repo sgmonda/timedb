@@ -1,0 +1,21 @@
+{
+	"name": "timedb",
+	"version": "0.0.1",
+	"description": "Simple time series database",
+	"keywords": ["time", "big data", "database"],
+	"homepage": "https://github.com/sgmonda/timedb",
+	"license": "MIT",
+	"main": "main.js",
+	"author": {
+		"name": "Sergio Garcia Mondaray <sgmonda@gmail.com> (http://www.sgmonda.com)"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sgmonda/timedb"
+	},
+	"engines": {
+		"node": "*"
+	},
+	"readmeFilename": "README.md",
+	"scripts": {}
+}
