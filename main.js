@@ -34,9 +34,10 @@ var constants = {
 
 /**
  * TimeDB class
- * @param {string} name Database name
+ * @param {string} name     Database name
+ * @param {number} duration Oldest allowed timestamp antiquity
  **/
-function TimeDB (name) {
+function TimeDB (name, duration) {
 
 	var self = this;
 
@@ -46,6 +47,7 @@ function TimeDB (name) {
 	});
 
 	self.name = name || Math.random().toString(36).slice(2);
+	self.duration = duration;
 
 	/**
 	 * Sets some values to an specified timestamp
@@ -64,7 +66,7 @@ function TimeDB (name) {
 			return number;
 		});
 
-		storage.setValues(ts, values);
+		storage.setValues(ts, values, self.duration);
 	};
 
 	/**
