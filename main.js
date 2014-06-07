@@ -60,7 +60,7 @@ function TimeDB (name, duration) {
 
 		values = values.map(function (v) {
 			var number = parseFloat(v);
-			if (!number || typeof number !== 'number') {
+			if (isNaN(number) || typeof number !== 'number') {
 				throw new Error('Wrong number format: ' + v);
 			}
 			return number;
