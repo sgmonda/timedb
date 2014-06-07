@@ -88,16 +88,53 @@ function TimeDB (name) {
 			throw new Error('Unknown function to compute: ' + fun);
 		}
 
-		var groups = {}, result = {}, group = 0, i;
+		var groups = {}, result = {}, group = 0, i, key;
 		for (i = start; i <= end; i++) {
 			group = start + (Math.floor((i - start) / resolution)) * resolution;
 			groups[group] = (groups[group] || []).concat(self.get(i));
 		}
 
 		switch (fun) {
+
 			case self.FUNCTION_SUM:
-			for (var key in groups) {
+			for (key in groups) {
 				result[key] = math.sum(groups[key]);
+			}
+			break;
+
+			case self.FUNCTION_MEAN:
+			for (key in groups) {
+				if (groups[key].length === 0) {
+					result[key] = 0;
+				} else {
+					result[key] = math.sum(groups[key]) / groups[key].length;
+				}
+			}
+			break;
+
+			case self.FUNCTION_COUNT:
+			for (key in groups) {
+				result[key] = groups[key].length;
+			}
+			break;
+
+			case self.FUNCTION_MAX:
+			for (key in groups) {
+				result[key] = math.max(groups[key]);
+			}
+			break;
+
+			case self.FUNCTION_MIN:
+			for (key in groups) {
+				result[key] = math.min(groups[key]);
+			}
+			break;
+
+			case self.FUNCTION_RANGE:
+			for (key in groups) {
+				var max = math.max(groups[key]);
+				var min = math.min(groups[key]);
+				result[key] = max - min;
 			}
 			break;
 		}

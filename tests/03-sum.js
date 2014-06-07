@@ -4,7 +4,7 @@
 
 var TimeDB = require('../main.js');
 
-describe('Basic tests', function () {
+describe('Compute sum', function () {
 
 	var db = null;
 
@@ -69,9 +69,27 @@ describe('Basic tests', function () {
 		db.set(1, 1);
 		db.set(2, 1);
 		db.set(3, [2]);
-		var result = db.compute(1, 5, 2, db.FUNCTION_SUM);
+
+		var result;
+
+		result = db.compute(1, 5, 2, db.FUNCTION_SUM);
 		expect(JSON.stringify(result)).toBe(JSON.stringify({1: 2, 3: 2, 5: 0}));
 
+		result = db.compute(3, 12, 3, db.FUNCTION_SUM);
+		expect(JSON.stringify(result)).toBe(JSON.stringify({3: 2, 6: 0, 9: 0, 12: 0}));
+	});
+
+	it('Out of margins sum 3', function () {
+
+		db.set(100, [3, 4]);
+		db.set(105, 1);
+		db.set(106, 1);
+		db.set(300, [2, 5]);
+
+		var result;
+
+		result = db.compute(55, 200, 50, db.FUNCTION_SUM);
+		expect(JSON.stringify(result)).toBe(JSON.stringify({55: 7, 105: 2, 155: 0}));
 	});
 
 });
