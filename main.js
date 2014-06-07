@@ -177,6 +177,9 @@ function TimeDB (name) {
 		return storage.getSize();
 	};
 
+	/**
+	 * Prints the database content
+	 **/
 	self.print = function () {
 
 		storage.print();
