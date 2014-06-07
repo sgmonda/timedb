@@ -88,10 +88,9 @@ function TimeDB (name) {
 			throw new Error('Unknown function to compute: ' + fun);
 		}
 
-		var groups = {}, result = {}, group, i;
+		var groups = {}, result = {}, group = 0, i;
 		for (i = start; i <= end; i++) {
-
-			group = Math.floor(i / resolution) * resolution + start;
+			group = start + (Math.floor((i - start) / resolution)) * resolution;
 			groups[group] = (groups[group] || []).concat(self.get(i));
 		}
 
@@ -139,6 +138,11 @@ function TimeDB (name) {
 	self.getSize = function () {
 
 		return storage.getSize();
+	};
+
+	self.print = function () {
+
+		storage.print();
 	};
 
 	/**
